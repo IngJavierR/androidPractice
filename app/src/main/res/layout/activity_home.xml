@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.home.androidpractice.HomeActivity">
 
-    <!-- Layout real de la actividad -->
-    <include layout="@layout/content_layout" />
-
-    <!-- Layout del menú lateral (Navigation View) -->
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navview"
+    <!--<fragment
+        android:id="@+id/fragment"
+        android:name="com.example.home.androidpractice.HelloFragment"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/header_navview"
-        app:menu="@menu/menu_navview" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        tools:layout="@layout/fragment_hello" />-->
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+    </FrameLayout>
 
-</android.support.v4.widget.DrawerLayout>
+</RelativeLayout>
