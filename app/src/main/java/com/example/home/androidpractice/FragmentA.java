@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -15,38 +16,31 @@ import android.widget.TextView;
 
 public class FragmentA extends Fragment {
 
-    private Button btnAdd;
-    private TextView txtResult;
-
-    private int firstNumber = 0, secondNumber = 0;
+    private Button btnSend;
+    private EditText etFirstNumber, etSecondNumber;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_a, container, false);
 
-        /*Bundle bundle = getArguments();
-        final int firtsNum = bundle.getInt(Constants.FIRST_NUM, 0);
-        final int secondNum = bundle.getInt(Constants.SECOND_NUM, 0);*/
+        btnSend = (Button) view.findViewById(R.id.btnSend);
+        etFirstNumber = (EditText) view.findViewById(R.id.etFirstNumber);
+        etSecondNumber = (EditText) view.findViewById(R.id.etSecondNumber);
 
-        btnAdd = (Button) view.findViewById(R.id.btnAdd);
-        txtResult = (TextView) view.findViewById(R.id.txtResult);
-
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addTwoNumbers(firstNumber, secondNumber);
+                sendData();
             }
         });
         return view;
     }
 
-    private void addTwoNumbers(int firtsNum, int secondNum) {
-        int result = firtsNum + secondNum;
-        txtResult.setText("Result: " + result);
-    }
+    private void sendData() {
+        int firstNum = Integer.valueOf(etFirstNumber.getText().toString());
+        int secondNum = Integer.valueOf(etSecondNumber.getText().toString());
 
-    public void setData(int firstNumber, int secondNumber) {
-        this.firstNumber = firstNumber;
-        this.secondNumber = secondNumber;
+        MyListener myListener = (MyListener) getActivity();
+        myListener.addTwoNumbers(firstNum, secondNum);
     }
 }
