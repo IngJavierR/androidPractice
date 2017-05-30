@@ -11,17 +11,16 @@ import android.widget.TextView;
 public class HomeActivity extends AppCompatActivity implements MyListener{
 
     FragmentManager manager;
-    TextView textView;
+    private int firstNum, secondNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        textView = (TextView) findViewById(R.id.txtResult);
-
         manager = getFragmentManager();
         addFragmentA();
+        addFragmentB();
     }
 
     private void addFragmentA() {
@@ -33,9 +32,24 @@ public class HomeActivity extends AppCompatActivity implements MyListener{
         transaction.commit();
     }
 
+    private void addFragmentB() {
+
+        FragmentB fragmentB = new FragmentB();
+
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.containerFragmentB, fragmentB, "fragB");
+        transaction.commit();
+    }
+
     @Override
     public void addTwoNumbers(int num1, int num2) {
-        int result = num1 + num2;
-        textView.setText("Result: " + result);
+        this.firstNum = num1;
+        this.secondNum = num2;
+    }
+
+    public void sendDataToFragmentB(View view) {
+
+        FragmentB fragmentB = (FragmentB) manager.findFragmentByTag("fragB");
+        fragmentB.addTwoNumbersInFragmentB(firstNum, secondNum);
     }
 }
